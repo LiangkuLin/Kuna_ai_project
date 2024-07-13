@@ -1,10 +1,10 @@
-from langchain_community.document_loaders import UnstructuredXMLLoader
+from langchain.document_loaders import UnstructuredXMLLoader
 from langchain.document_loaders import TextLoader
 from dotenv import load_dotenv
 from langchain.text_splitter import CharacterTextSplitter 
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores.chroma import Chroma
-from langchain_community.document_loaders import PyPDFLoader
+from langchain.document_loaders import PyPDFLoader
 
 load_dotenv()
 
