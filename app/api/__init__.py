@@ -2,12 +2,13 @@ from flask import Blueprint, jsonify
 
 api_bp = Blueprint('apis', __name__)
 
-@api_bp.route('/database/create',methods=['GET'])
+@api_bp.route('/database/create',methods=['POST'])
 def create_database():
-    # try:
-    #     print('work')
+    try:
         from app.server.database import createDatabase
+        print('Vector建立中')
         createDatabase()
-        return jsonify("DB create Success")
-    # except:
-    #       return jsonify("DB create fail")
+        print('Vector建立完成')
+        return jsonify({"message":'Vector建立完成'}),200 
+    except Exception as error:
+          return jsonify({"message":"Vector建立失敗"}),500

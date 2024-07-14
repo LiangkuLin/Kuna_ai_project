@@ -13,17 +13,21 @@ def createDatabase():
         chunk_size = 300,
         chunk_overlap = 100, 
     )
-    loader = PyPDFLoader("data/data.pdf")
-    print(loader)
-    docs = loader.load_and_split(text_splitter)
-    print(docs)
+    try:
+        loader = PyPDFLoader("data/data.pdf")
+        print(loader)
+        docs = loader.load_and_split(text_splitter)
+        print(docs)
 
-    db = Chroma.from_documents(
-        docs,
-        embedding=embeddings,
-        # MySQL dirctory
-        persist_directory='db'
-    )
-    print('Create vector database success')
+        db = Chroma.from_documents(
+            docs,
+            embedding=embeddings,
+            # MySQL dirctory
+            persist_directory='db'
+        )
+        print('Create vector database success')
+        return db 
+    except: 
+       raise  Exception("Read pdf fail or create db fail")
 
     
