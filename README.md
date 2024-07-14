@@ -5,7 +5,7 @@
     - Install [Anaconda](https://www.anaconda.com/download) and create a new virtual environment
     - Open the virtual environment terminal and install all required packages
     ```
-    pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community python-dotenv pypdf
+    pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community langchain.chains python-dotenv pypdf
     ```
 
 2. Create .flaskenv file in this project

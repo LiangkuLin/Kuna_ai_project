@@ -10,7 +10,7 @@ def createDatabase():
     embeddings = OpenAIEmbeddings()
     text_splitter = CharacterTextSplitter(
     separator="\f",
-        chunk_size = 300,
+        chunk_size = 1000,
         chunk_overlap = 100, 
     )
     try:
