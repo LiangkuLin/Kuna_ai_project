@@ -6,7 +6,7 @@ api_bp = Blueprint('apis', __name__)
 def create_database():
     # try:
     #     print('work')
-        from app.server.set_vector_database import createDatabase
+        from app.server.database import createDatabase
         createDatabase()
         return jsonify("DB create Success")
     # except:

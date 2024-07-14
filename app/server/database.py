@@ -13,7 +13,7 @@ def createDatabase():
         chunk_size = 1000,
         chunk_overlap = 0, 
     )
-    loader = PyPDFLoader("../../data/law.pdf")
+    loader = PyPDFLoader("data/law.pdf")
     print(loader)
     docs = loader.load_and_split(text_splitter)
     print(docs)
@@ -22,7 +22,7 @@ def createDatabase():
         docs,
         embedding=embeddings,
         # MySQL dirctory
-        persist_directory='../law/db'
+        persist_directory='db'
     )
     print('Create vector database success')
 
