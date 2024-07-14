@@ -1,9 +1,8 @@
 # import langchain
 from langchain_chroma import Chroma
 from langchain.chains import RetrievalQA
-from langchain_openai import OpenAIEmbeddings
-from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
+from langchain_openai import OpenAIEmbeddings,ChatOpenAI
+from langchain.prompts import HumanMessagePromptTemplate, ChatPromptTemplate
 
 def queryQuestionFromDatabase(question): 
     try:
@@ -29,5 +28,5 @@ def queryQuestionFromDatabase(question):
         # Question
         result = chain.run(question)
         return result 
-    except: 
-         raise  Exception("Send question fail")
+    except Exception as error: 
+         raise  Exception(error)
