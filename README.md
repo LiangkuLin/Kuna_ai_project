@@ -14,6 +14,10 @@
     FLASK_ENV=development
     OPENAI_API_KEY=xxxxx
     ```
+3. (Optional) If the local_database not exist. Use terminal and cd to the manual folder and run the following command to create the vector db 
+    ```
+    python database.py
+    ```
 
 ### Project Running
 1. Run Anaconda and open the corresponding terminal
