@@ -5,7 +5,7 @@ api_langchain = Blueprint('langchain', __name__)
 
 @api_langchain.route('/qs',methods=['GET'])
 def question_database():
-    from app.server.prompt import queryQuestionFromDatabase 
+    from app.service.prompt import queryQuestionFromDatabase 
     try:
         question = request.args.get('question')
         answer = queryQuestionFromDatabase(question)
@@ -16,7 +16,7 @@ def question_database():
 @api_langchain.route('/create',methods=['POST'])
 def create_database():
     try:
-        from app.server.database import createDatabase
+        from app.service.database import createDatabase
         print('Vector建立中')
         createDatabase()
         print('Vector建立完成')
