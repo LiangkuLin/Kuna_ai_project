@@ -8,10 +8,11 @@
     pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community python-dotenv pypdf
     ```
 
-2. Set up openai key in this project
-   - create .env file in main folder and put the following key in it
+2. Create .flaskenv file in this project
     ```
-    OPENAI_API_KEY=xxxx
+    FLASK_APP=run.py
+    FLASK_ENV=development
+    OPENAI_API_KEY=xxxxx
     ```
 
 4. Run project
