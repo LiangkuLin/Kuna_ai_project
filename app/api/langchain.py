@@ -22,4 +22,4 @@ def create_database():
         print('Vector建立完成')
         return jsonify(ApiResponse('Vector建立完成').json),200
     except Exception as error:
-        return jsonify(ApiResponse("Vector建立失敗",error).json),500
+        return jsonify(ApiResponse("Vector建立失敗", error).json),500
