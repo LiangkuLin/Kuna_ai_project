@@ -15,13 +15,11 @@
     OPENAI_API_KEY=xxxxx
     ```
 
-4. Run project
-    - In terminal, run 
+### Project Runing
+1. Run Anaconda and open the corresponding terminal
+2. CD to the project repository
+3. Run project
+    - In terminal, input this command
     ```
     waitress-serve --port=8080 run:app
-    ```
-6. If the vector database is not created, please run the following command to create database
-    - In terminal, run (deprecated, just use postman to call api for now)
-    ```
-    python set_vector_database
     ```
