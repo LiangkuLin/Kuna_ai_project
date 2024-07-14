@@ -1,24 +1,12 @@
-from flask import Blueprint, jsonify,request
+from flask import Blueprint, jsonify
+
 from app.model.response import ApiResponse
-api_bp = Blueprint('api', __name__)
 
-@api_bp.route('/database/qs',methods=['GET'])
-def question_database():
-    from app.server.prompt import queryQuestionFromDatabase 
-    try:
-        question = request.args.get('question')
-        answer = queryQuestionFromDatabase(question)
-        return jsonify(ApiResponse(answer).json),200
-    except Exception as error:
-        return jsonify(ApiResponse(f"Vector取資失敗, {error}").json),500
 
-@api_bp.route('/database/create',methods=['POST'])
-def create_database():
-    try:
-        from app.server.database import createDatabase
-        print('Vector建立中')
-        createDatabase()
-        print('Vector建立完成')
-        return jsonify(ApiResponse('Vector建立完成').json),200
-    except Exception as error:
-        return jsonify(ApiResponse(f"Vector建立失敗, {error}").json),500
+api_test = Blueprint('test', __name__)
+
+@api_test.route('/',methods=['GET'])
+def test():
+    return jsonify(ApiResponse("Test success").json),200
+
+
