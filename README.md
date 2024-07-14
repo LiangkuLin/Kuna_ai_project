@@ -5,7 +5,7 @@
     - Install [Anaconda](https://www.anaconda.com/download) and create a new virtual environment
     - Open the virtual environment terminal and install all required packages
     ```
-    pip install python-dotenv langchain openai langchain-chroma langchain-openai
+    pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community python-dotenv pypdf
     ```
 
 2. Set up openai key in this project
@@ -17,10 +17,10 @@
 4. Run project
     - In terminal, run 
     ```
-    python main.py
+    waitress-serve --port=8080 run:app
     ```
 6. If the vector database is not created, please run the following command to create database
     - In terminal, run 
     ```
-    python main.py
+    python set_vector_database
     ```
