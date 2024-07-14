@@ -7,25 +7,23 @@ from langchain.document_loaders import PyPDFLoader
 
 
 def createDatabase():
-    embeddings = OpenAIEmbeddings()
-    text_splitter = CharacterTextSplitter(
-    separator="\f",
-        chunk_size = 1000,
-        chunk_overlap = 100, 
-    )
     try:
+        embeddings = OpenAIEmbeddings()
+        text_splitter = CharacterTextSplitter(
+        separator="\f",
+            chunk_size = 1000,
+            chunk_overlap = 100, 
+        )
         loader = PyPDFLoader("data/data.pdf")
-        print(loader)
         docs = loader.load_and_split(text_splitter)
         print(docs)
-
         db = Chroma.from_documents(
             docs,
-            embedding=embeddings,
+            embeddings,
             # MySQL dirctory
             persist_directory='db'
         )
-        print('Create vector database success')
+        print('db',db)
         return db 
     except Exception as error: 
          raise  Exception(error)
