@@ -27,7 +27,7 @@ def createDatabase():
         )
         print('Create vector database success')
         return db 
-    except: 
-       raise  Exception("Read pdf fail or create db fail")
+    except Exception as error: 
+         raise  Exception(error)
 
     

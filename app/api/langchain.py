@@ -11,7 +11,7 @@ def question_database():
         answer = queryQuestionFromDatabase(question)
         return jsonify(ApiResponse(answer).json),200
     except Exception as error:
-        return jsonify(ApiResponse(f"Vector取資失敗, {error}").json),500
+        return jsonify(ApiResponse("Vector取資失敗", error).json),500
 
 @api_langchain.route('/create',methods=['POST'])
 def create_database():
@@ -22,4 +22,4 @@ def create_database():
         print('Vector建立完成')
         return jsonify(ApiResponse('Vector建立完成').json),200
     except Exception as error:
-        return jsonify(ApiResponse(f"Vector建立失敗, {error}").json),500
+        return jsonify(ApiResponse("Vector建立失敗",error).json),500
