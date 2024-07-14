@@ -10,10 +10,10 @@ def createDatabase():
     embeddings = OpenAIEmbeddings()
     text_splitter = CharacterTextSplitter(
     separator="\f",
-        chunk_size = 1000,
-        chunk_overlap = 0, 
+        chunk_size = 300,
+        chunk_overlap = 100, 
     )
-    loader = PyPDFLoader("data/law.pdf")
+    loader = PyPDFLoader("data/data.pdf")
     print(loader)
     docs = loader.load_and_split(text_splitter)
     print(docs)
