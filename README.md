@@ -15,7 +15,7 @@
     OPENAI_API_KEY=xxxxx
     ```
 
-### Project Runing
+### Project Running
 1. Run Anaconda and open the corresponding terminal
 2. CD to the project repository
 3. Run project
