@@ -21,7 +21,7 @@
     waitress-serve --port=8080 run:app
     ```
 6. If the vector database is not created, please run the following command to create database
-    - In terminal, run 
+    - In terminal, run (deprecated, just use postman to call api for now)
     ```
     python set_vector_database
     ```
