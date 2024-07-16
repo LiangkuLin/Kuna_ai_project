@@ -24,7 +24,7 @@
 1. Open Anaconda and open the corresponding python environment terminal
 2. CD to the project repository
 3. Run project
-    - In terminal, input this command (Note that the server will keep running, press Cirl+C to terminate)
+    - In terminal, input this command (Note that the server will keep running, press ctrl+c to terminate)
     ```
     waitress-serve --port=8080 run:app
     ```
