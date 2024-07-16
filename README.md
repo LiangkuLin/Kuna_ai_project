@@ -4,7 +4,7 @@
 1. Set up running environment
     - Install [Anaconda](https://www.anaconda.com/download)
     - Open Anaconda and import the conda env file from this project 
-    - (Optional) If conda env file cannot work in Anaconda, please create a new python environment and install all dependcies manually 
+    - (Optional) If conda env cannot be imported in Anaconda, please create a new python environment and install all dependencies manually 
     ```
     pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community langchain.chains python-dotenv pypdf
     ```
@@ -15,7 +15,7 @@
     FLASK_ENV=development
     OPENAI_API_KEY=xxxxx
     ```
-3. (Optional) If the local_database not exist, use terminal and cd to the manual folder and run the following command to create the vector db. Note that dependcies are needed in this step. 
+3. (Optional) If the local_database not exist, use terminal and cd to the manual folder and run the following command to create the vector db. Note that dependencies are needed in this step. 
     ```
     python database.py
     ```
