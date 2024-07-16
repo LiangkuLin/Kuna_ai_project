@@ -2,25 +2,26 @@
 ### Project initialization 
 
 1. Set up running environment
-    - Install [Anaconda](https://www.anaconda.com/download) and create a new virtual environment
-    - Open the virtual environment terminal and install all required packages
+    - Install [Anaconda](https://www.anaconda.com/download)
+    - Open Anaconda and import the conda env file from this project 
+    - (Optional) If conda env file cannot work in Anaconda, please create a new python environment and install all dependcies manually 
     ```
     pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community langchain.chains python-dotenv pypdf
     ```
 
-2. Create .flaskenv file in this project
+2. Create .flaskenv file in the root folder of this project
     ```
     FLASK_APP=run.py
     FLASK_ENV=development
     OPENAI_API_KEY=xxxxx
     ```
-3. (Optional) If the local_database not exist. Use terminal and cd to the manual folder and run the following command to create the vector db 
+3. (Optional) If the local_database not exist, use terminal and cd to the manual folder and run the following command to create the vector db. Note that dependcies are needed in this step. 
     ```
     python database.py
     ```
 
 ### Project Running
-1. Run Anaconda and open the corresponding terminal
+1. Open Anaconda and open the corresponding python environment terminal
 2. CD to the project repository
 3. Run project
     - In terminal, input this command
