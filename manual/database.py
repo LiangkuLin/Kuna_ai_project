@@ -10,19 +10,20 @@ load_dotenv(dotenv_path='../.flaskenv')
 
 embeddings = OpenAIEmbeddings()
 text_splitter = CharacterTextSplitter(
-separator="\f",
-    chunk_size = 1000,
-    chunk_overlap = 100, 
+separator="\n",
+    chunk_size = 2000,
+    chunk_overlap = 200, 
 )
-loader = TextLoader("../data/data.txt")
+
+loader = TextLoader("../data/data.txt",encoding='utf-8')
 docs = loader.load_and_split(text_splitter)
-print(docs)
+
+print("開始Chroma綁定")
 db = Chroma.from_documents(
     docs,
     embeddings,
-    # MySQL dirctory
     persist_directory='../local_database'
 )
-query = "民法第一條是啥"
-result = db.similarity_search(query)
-print("Test Result: ",result) 
+print("完成Chroma綁定")
+print("TestResult",db.similarity_search("民法第一條是什麼"))
+
