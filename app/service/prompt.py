@@ -28,5 +28,5 @@ def queryQuestionFromDatabase(question):
     
 
         # Question
-        result = chain.run(question)
+        result = chain(question)
         return result
