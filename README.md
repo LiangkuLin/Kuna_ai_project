@@ -15,7 +15,7 @@
     FLASK_ENV=development
     OPENAI_API_KEY=xxxxx
     ```
-3. (Optional) If the local_database not exist, use terminal and cd to the manual folder and run the following command to create the vector db. Note that dependencies are needed in this step. 
+3. We are currently using local "Chroma" database. Please open the terminal and cd to the manual folder. Run the following command to create the vector db (Note that dependencies are needed in this step) 
     ```
     python database.py
     ```
@@ -24,7 +24,7 @@
 1. Open Anaconda and open the corresponding python environment terminal
 2. CD to the project repository
 3. Run project
-    - In terminal, input this command (Note that the server will keep running, press ctrl+c to terminate)
+    - Input this command (Note that the server will keep running, press ctrl+c to terminate)
     ```
     waitress-serve --port=8080 run:app
     ```
