@@ -13,9 +13,9 @@ load_dotenv(dotenv_path='../.flaskenv')
 
 embeddings = OpenAIEmbeddings(show_progress_bar=True)
 text_splitter = CharacterTextSplitter(
-separator="\n",
-    chunk_size = 700,
-    chunk_overlap = 100, 
+separator="<法規性質>",
+    chunk_size = 1500,
+    chunk_overlap = 500, 
 )
 
  # First Data 
@@ -24,7 +24,7 @@ docs = loader.load_and_split(text_splitter)
 
 print("開始Pinecone綁定")
 db = PineconeVectorStore(embedding=embeddings,index_name=os.getenv("PINECONE_INDEX_NAME"))
-split_Docs = np.array_split(docs, 4)
+split_Docs = np.array_split(docs, 5)
 try:
     for doc in split_Docs:
         db.add_documents(doc)
