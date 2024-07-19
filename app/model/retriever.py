@@ -2,6 +2,7 @@ from langchain.embeddings.base import Embeddings
 from langchain_community.vectorstores import Chroma
 from langchain.schema import BaseRetriever
 
+# Just example, not use for now
 class RedundantFilterRetriever(BaseRetriever): 
     embeddings: Embeddings 
     chroma: Chroma 
