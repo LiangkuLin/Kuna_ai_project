@@ -9,6 +9,10 @@ import time
 import numpy as np
 import os 
 
+# DB train model 
+# 1. chunk_size = 700, chunk_overlap=100, -> student 
+# 2. chunk_size = 2000, chunk_overlap=500 ->　job
+
 load_dotenv(dotenv_path='../.flaskenv')
 
 embeddings = OpenAIEmbeddings(show_progress_bar=True)
