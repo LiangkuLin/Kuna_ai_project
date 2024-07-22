@@ -9,13 +9,15 @@
     pip install python-dotenv langchain openai langchain-chroma langchain-openai flask waitress langchain-community langchain.chains pypdf
     ```
 
-2. Create a .flaskenv file in the root folder of this project
+2. Create a .flaskenv file in the root folder of this project. 
     ```
     FLASK_APP=run.py
     FLASK_ENV=development
     OPENAI_API_KEY=xxxxx
-    ```
-3. We are currently using a local "Chroma" database. Please open the terminal and cd to the manual folder. Run the following command to create the vector db (Note that dependencies are needed in this step) 
+    PINECONE_API_KEY=xxxx
+    PINECONE_INDEX_NAME=xxxx
+    ``` 
+3. We are currently using a Pinecone database. Please open the terminal and cd to the manual folder. Run the following command to create the vector db (Note that dependencies are needed in this step)   
     ```
     python database.py
     ```
