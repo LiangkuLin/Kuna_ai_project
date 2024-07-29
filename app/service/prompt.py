@@ -1,7 +1,7 @@
 import langchain
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings,ChatOpenAI
-from langchain.prompts import ChatPromptTemplate,HumanMessagePromptTemplate, SystemMessagePromptTemplate
+from langchain.prompts import ChatPromptTemplate,HumanMessagePromptTemplate, SystemMessagePromptTemplate,AIMessagePromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough,RunnableSerializable
 from langchain_core.documents import Document
@@ -20,7 +20,10 @@ def queryQuestionFromDatabase(question):
         prompt = ChatPromptTemplate(
             input_variables=["question","context"],
             messages=[
-                SystemMessagePromptTemplate.from_template("Please respond to the question using the provided documents and in Traditional Chinese. The documents are {context}. If the answer cannot be found in the documents, please indicate that you are humor."),
+                SystemMessagePromptTemplate.from_template("Please respond to the question according to your previous answer. If you cannot find the answer in that, please respond to the question using the provided documents. The documents are {context}. All answer should be in Chinese. If the answer cannot be found in the documents, please indicate that you are don't know the answer."),
+                # Can put all previous reqesuts and answers here 
+                HumanMessagePromptTemplate.from_template("How long are you?"),
+                AIMessagePromptTemplate.from_template("I am 30 cm"),
                 HumanMessagePromptTemplate.from_template("{question}")
             ]
         )
