@@ -1,9 +1,11 @@
 import langchain
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings,ChatOpenAI
+from langchain.prompts import ChatPromptTemplate,HumanMessagePromptTemplate, SystemMessagePromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
+from langchain_core.runnables import RunnablePassthrough,RunnableSerializable
 from langchain_core.documents import Document
+from langchain.memory import ConversationBufferMemory
 from langchain import hub
 
 # from app.model.retriever import RedundantFilterRetriever
@@ -15,9 +17,13 @@ def queryQuestionFromDatabase(question):
         llm =ChatOpenAI()
         # Read db here 
         db = PineconeVectorStore(embedding=embeddings,index_name=os.getenv("PINECONE_INDEX_NAME"))
- 
-        prompt = hub.pull("rlm/rag-prompt")
-    
+        prompt = ChatPromptTemplate(
+            input_variables=["question","context"],
+            messages=[
+                SystemMessagePromptTemplate.from_template("Please respond to the question using the provided documents and in Traditional Chinese. The documents are {context}. If the answer cannot be found in the documents, please indicate that you are humor."),
+                HumanMessagePromptTemplate.from_template("{question}")
+            ]
+        )
         chain = (
             {
                 "context": db.as_retriever() | format_docs,
@@ -27,10 +33,10 @@ def queryQuestionFromDatabase(question):
             | llm
             | StrOutputParser()
         )
-     
-        
         # Question
         result = chain.invoke(question)
+        # Can stroe the messages here 
+
         return result
 
 
