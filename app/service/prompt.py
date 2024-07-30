@@ -1,44 +1,98 @@
 import langchain
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings,ChatOpenAI
-from langchain.prompts import ChatPromptTemplate,HumanMessagePromptTemplate, SystemMessagePromptTemplate,AIMessagePromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough,RunnableSerializable
+from langchain.prompts import ChatPromptTemplate,MessagesPlaceholder
 from langchain_core.documents import Document
-from operator import itemgetter
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain.chains.history_aware_retriever import create_history_aware_retriever
+from langchain.chains.retrieval import create_retrieval_chain
 
 
-# from app.model.retriever import RedundantFilterRetriever
+# https://python.langchain.com/v0.2/docs/tutorials/qa_chat_history/
+
+
 import os 
 
 def queryQuestionFromDatabase(question): 
         langchain.debug = True
         embeddings = OpenAIEmbeddings()
         llm =ChatOpenAI()
-        # Read db here 
         db = PineconeVectorStore(embedding=embeddings,index_name=os.getenv("PINECONE_INDEX_NAME"))
-        prompt = ChatPromptTemplate(
-            input_variables=["question","context"],
-            messages=[
-                SystemMessagePromptTemplate.from_template("Please respond to the question according to your previous answer. If you cannot find the answer in that, please respond to the question using the provided documents. The documents are {context}. All answer should be in Chinese. If the answer cannot be found in the documents, please indicate that you are don't know the answer."),
-                HumanMessagePromptTemplate.from_template("{question}")
+        retriever =  db.as_retriever(),
+        ### Contextualize question ###
+        print("start")
+        contextualize_q_system_prompt = (
+            "Given a chat history and the latest user question "
+            "which might reference context in the chat history, "
+            "formulate a standalone question which can be understood "
+            "without the chat history. Do NOT answer the question, "
+            "just reformulate it if needed and otherwise return it as is."
+        )
+        print("start start")
+        contextualize_q_prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", contextualize_q_system_prompt),
+                MessagesPlaceholder("chat_history"),
+                ("human", "{input}"),
             ]
         )
-        chain = (
-            {
-                "context": itemgetter("question")|db.as_retriever(),
-                "question": itemgetter("question"),
-            }
-            | prompt
-            | llm
-            | StrOutputParser()
+        
+        print("start start start")
+        history_aware_retriever = create_history_aware_retriever(
+            llm, retriever, contextualize_q_prompt
         )
-        # Question
-        result = chain.invoke({"question":question})
-        # Can stroe the messages here 
 
+        ### Answer question ###
+        print("start2")
+        system_prompt = (
+            "You are an assistant for question-answering tasks. "
+            "Use the following pieces of retrieved context to answer "
+            "the question. If you don't know the answer, say that you "
+            "don't know. Use three sentences maximum and keep the "
+            "answer concise."
+            "\n\n"
+            "{context}"
+        )
+        qa_prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", system_prompt),
+                MessagesPlaceholder("chat_history"),
+                ("human", "{input}"),
+            ]
+        )
+        question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
+
+        rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
+        
+       
+        ### Statefully manage chat history ###
+        print("start3")
+        store = {}
+        def get_session_history(session_id: str) -> BaseChatMessageHistory:
+            if session_id not in store:
+                store[session_id] = ChatMessageHistory()
+            return store[session_id]
+        
+        conversational_rag_chain = RunnableWithMessageHistory(
+            rag_chain,
+            get_session_history,
+            input_messages_key="input",
+            history_messages_key="chat_history",
+            output_messages_key="answer",
+        )
+        
+        result= conversational_rag_chain.invoke(
+            {"input": question},
+            config={
+                "configurable": {"session_id": "abc123"}
+            },  # constructs a key "abc123" in `store`.
+        )["answer"]
+        print(result)
         return result
-
+        
 
 # Stringfy docs for prompt 
 def format_docs(docs: list[Document]):
@@ -46,3 +100,4 @@ def format_docs(docs: list[Document]):
     for doc in docs:
         stringDoc = stringDoc+doc.page_content+ "\n"
     return stringDoc
+
