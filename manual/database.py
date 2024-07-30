@@ -23,7 +23,7 @@ separator="\n",
 )
 
  # First Data 
-loader = TextLoader("../data/data.txt", encoding = 'utf-8')
+loader = TextLoader("../data/data_Nate_with_extra_info.txt", encoding = 'utf-8')
 docs = loader.load_and_split(text_splitter)
 
 print("開始Pinecone綁定")
