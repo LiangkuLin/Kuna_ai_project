@@ -14,6 +14,8 @@ from langchain.chains.retrieval import create_retrieval_chain
 
 import os 
 
+store = {}
+
 def queryQuestionFromDatabase(question): 
         langchain.debug = True
         embeddings = OpenAIEmbeddings()
@@ -45,7 +47,8 @@ def queryQuestionFromDatabase(question):
             "Use the following pieces of retrieved context to answer "
             "the question. If you don't know the answer, say that you "
             "don't know. Use three sentences maximum and keep the "
-            "answer concise."
+            "answer concise." 
+            "Answer should be in traditional chinese in default."
             "\n\n"
             "{context}"
         )
@@ -62,7 +65,7 @@ def queryQuestionFromDatabase(question):
         
        
         ### Statefully manage chat history ###
-        store = {}
+    
         def get_session_history(session_id: str) -> BaseChatMessageHistory:
             if session_id not in store:
                 store[session_id] = ChatMessageHistory()
