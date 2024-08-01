@@ -16,6 +16,10 @@
     OPENAI_API_KEY=xxxxx
     PINECONE_API_KEY=xxxx
     PINECONE_INDEX_NAME=xxxx
+    REDIS_HOST=XXXX
+    REDIS_PORT=1xxx
+    REDIS_USERNAME=xxx
+    REFIS_PASSWORD=xxxx
     ``` 
 3. We are currently using a Pinecone database. Please open the terminal and cd to the manual folder. Run the following command to create the vector db (Note that dependencies are needed in this step)   
     ```
