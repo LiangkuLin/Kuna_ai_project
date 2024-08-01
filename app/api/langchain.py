@@ -8,7 +8,8 @@ def question_database():
     from app.service.prompt import queryQuestionFromDatabase 
     try:
         question = request.args.get('question')
-        answer = queryQuestionFromDatabase(question)
+        session_id= request.args.get('session_id')
+        answer = queryQuestionFromDatabase(question,session_id)
         return jsonify(ApiResponse(answer).json),200
     except Exception as error:
         return jsonify(ApiResponse("Vector取資失敗", error).json),500

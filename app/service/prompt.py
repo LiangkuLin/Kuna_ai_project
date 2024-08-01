@@ -10,13 +10,11 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.chains.retrieval import create_retrieval_chain
 # https://python.langchain.com/v0.2/docs/tutorials/qa_chat_history/
-
-
+from app.model.redis_db import RedisChatMessageHistory
 import os 
 
-store = {}
 
-def queryQuestionFromDatabase(question): 
+def queryQuestionFromDatabase(question:str, session_id:str): 
         langchain.debug = True
         embeddings = OpenAIEmbeddings()
         llm =ChatOpenAI()
@@ -60,17 +58,11 @@ def queryQuestionFromDatabase(question):
             ]
         )
         question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
-
         rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
-        
        
         ### Statefully manage chat history ###
-    
-        def get_session_history(session_id: str) -> BaseChatMessageHistory:
-            if session_id not in store:
-                store[session_id] = ChatMessageHistory()
-            return store[session_id]
         
+  
         conversational_rag_chain = RunnableWithMessageHistory(
             rag_chain,
             get_session_history,
@@ -82,8 +74,8 @@ def queryQuestionFromDatabase(question):
         result= conversational_rag_chain.invoke(
             {"input": question},
             config={
-                "configurable": {"session_id": "abc123"}
-            },  # constructs a key "abc123" in `store`.
+                "configurable": {"session_id": session_id}
+            },
         )["answer"]
         return result
         
@@ -95,3 +87,6 @@ def format_docs(docs: list[Document]):
         stringDoc = stringDoc+doc.page_content+ "\n"
     return stringDoc
 
+def get_session_history(session_id: str) -> RedisChatMessageHistory:
+    print(os.getenv('REDIS_HOST')+":"+os.getenv('REDIS_PORT'))
+    return  RedisChatMessageHistory(session_id)
