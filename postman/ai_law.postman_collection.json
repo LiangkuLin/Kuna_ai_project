@@ -32,7 +32,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/database/qs?question=根據全國法規資料庫。第192條內容是什麼?",
+					"raw": "http://localhost:8080/api/database/qs?question=我在廁所被偷窺，偷看應付什麼責任&session_id=Ku123",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -46,29 +46,12 @@
 					"query": [
 						{
 							"key": "question",
-							"value": "根據全國法規資料庫。第192條內容是什麼?"
+							"value": "我在廁所被偷窺，偷看應付什麼責任"
+						},
+						{
+							"key": "session_id",
+							"value": "Ku123"
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create_database",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/database/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"database",
-						"create"
 					]
 				}
 			},
