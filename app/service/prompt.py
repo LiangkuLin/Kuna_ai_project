@@ -88,5 +88,4 @@ def format_docs(docs: list[Document]):
     return stringDoc
 
 def get_session_history(session_id: str) -> RedisChatMessageHistory:
-    print(os.getenv('REDIS_HOST')+":"+os.getenv('REDIS_PORT'))
     return  RedisChatMessageHistory(session_id)

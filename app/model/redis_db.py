@@ -10,7 +10,6 @@ from langchain_core.messages import (
 )
 
 from langchain_community.utilities.redis import get_client
-import redis
 import os 
 
 logger = logging.getLogger(__name__)
