@@ -87,5 +87,6 @@ def format_docs(docs: list[Document]):
         stringDoc = stringDoc+doc.page_content+ "\n"
     return stringDoc
 
+# 604800 ->　1 week 
 def get_session_history(session_id: str) -> RedisChatMessageHistory:
-    return  RedisChatMessageHistory(session_id)
+    return  RedisChatMessageHistory(session_id,"message_store:",604800 )

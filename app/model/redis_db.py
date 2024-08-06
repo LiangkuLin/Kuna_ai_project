@@ -66,6 +66,8 @@ class RedisChatMessageHistory(BaseChatMessageHistory):
         )
 
     def add_message(self, message: BaseMessage) -> None:
+        if self.redis_client.llen(self.key)>20:
+            self.redis_client.rpop(self.key)        
         """Append the message to the record in Redis"""
         self.redis_client.lpush(self.key, json.dumps(message_to_dict(message)))
         if self.ttl:
