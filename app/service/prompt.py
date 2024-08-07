@@ -9,9 +9,10 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.chains.retrieval import create_retrieval_chain
-# https://python.langchain.com/v0.2/docs/tutorials/qa_chat_history/
 from app.model.redis_db import RedisChatMessageHistory
-import os 
+
+import os
+
 
 
 def queryQuestionFromDatabase(question:str, session_id:str): 
@@ -42,12 +43,11 @@ def queryQuestionFromDatabase(question:str, session_id:str):
         ### Answer question ###
         system_prompt = (
             "You are an assistant for question-answering tasks. "
+            "Answer should be in traditional chinese in default."
             "Use the following pieces of retrieved context to answer "
             "the question. If you don't know the answer, say that you "
             "don't know. Use three sentences maximum and keep the "
             "answer concise." 
-            "Answer should be in traditional chinese in default."
-            "\n\n"
             "{context}"
         )
         qa_prompt = ChatPromptTemplate.from_messages(
