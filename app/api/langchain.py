@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify,request
 from app.model.response import ApiResponse
 from app.util.length_check import checklength
+from app.service.classification import classifiedQuestion
 
 
 api_langchain = Blueprint('langchain', __name__)
@@ -17,7 +18,10 @@ def question_database():
         question = request.args.get('question')
         session_id= request.args.get('session_id')
         checklength(question,100)
-        answer = queryQuestionFromDatabase(question,session_id)
+        
+        # data proccess
+        # answer = queryQuestionFromDatabase(question,session_id)
+        answer = classifiedQuestion(question)
         return jsonify(ApiResponse(answer).json),200
     except Exception as error:
-        return jsonify(ApiResponse("vector_database", error).json),500
+        return jsonify(ApiResponse("question_error", error).json),500
