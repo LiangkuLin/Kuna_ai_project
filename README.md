@@ -34,4 +34,12 @@
     ```
     waitress-serve --port=8080 run:app
     ```
-    
+### Docker 
+1. To build image, run 
+    ```
+    docker build . -t [image name]:[tag]
+    ```
+2. To run container, run
+    ```
+    docker run --publish 8080:8080 --name [container name] [image name with tag]
+    ```
