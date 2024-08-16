@@ -41,5 +41,5 @@
     ```
 2. To run container, run
     ```
-    docker run --publish 8080:8080 --name [container name] [image name with tag]
+    docker run --env-file .flaskenv -p 8080:8080 --name [container name] [image name]
     ```
