@@ -32,7 +32,7 @@
 3. Run project
     - Input this command (Note that the server will keep running, press Ctrl+C to terminate)
     ```
-    waitress-serve --port=8080 run:app
+    waitress-serve --port=8080 application:app
     ```
 ### Docker 
 1. To build image, run 
