@@ -10,4 +10,6 @@ def create_app():
     from app.api.langchain import api_langchain
     app.register_blueprint(api_test, url_prefix=f'/{BASE_API_ROUTE}')
     app.register_blueprint(api_langchain, url_prefix=f'/{BASE_API_ROUTE}/database')
+    # init line 
+ 
     return app 
