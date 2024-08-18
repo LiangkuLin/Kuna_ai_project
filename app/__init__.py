@@ -11,5 +11,6 @@ def create_app():
     app.register_blueprint(api_test, url_prefix=f'/{BASE_API_ROUTE}')
     app.register_blueprint(api_langchain, url_prefix=f'/{BASE_API_ROUTE}/database')
     # init line 
- 
+    from app.api.line import line
+    app.register_blueprint(line,url_prefix=f'/{BASE_API_ROUTE}/line')
     return app 
