@@ -25,7 +25,7 @@
     ```
     python application.py
     ```
-### Deployment
+### Deployment (optional)
 1. Only several folders are needed when deployment
     ```
     app (folder)
@@ -37,7 +37,17 @@
     ```
 2. Zip these folders and upload to aws elastic beanstalk 
 
-### Vector database 
+### Update requirement.txt (optional)
+    - Run the following to check all dependencies in venv (virt)
+    ```
+    pip freeze
+    ```
+    - Run the following to update dependencies to requirement.txt
+    ```
+    pip freeze > requirements.txt
+    ```
+
+### Vector database (optional)
 1. We are currently using a Pinecone database. Please open the terminal and cd to the manual folder. Run the following command to create the vector db (Note that dependencies are needed in this step)   
     ```
     python database.py
