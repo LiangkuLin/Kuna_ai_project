@@ -14,14 +14,14 @@
     REFIS_PASSWORD=xxxx
     ``` 
 
-2. Set up running environment and run
+2. Set up python environment and run project
     - Open termianl and head to WSL
     - CD to the project repository
     - Create running env 
     ```
     source virt/bin/activate
     ```
-    - Run the following command to run this project 
+    - Run this project 
     ```
     python application.py
     ```
@@ -38,11 +38,11 @@
 2. Zip these folders and upload to aws elastic beanstalk 
 
 ### Update requirement.txt (optional)
-    - Run the following to check all dependencies in venv (virt)
+    - Check all dependencies in venv (virt)
     ```
     pip freeze
     ```
-    - Run the following to update dependencies to requirement.txt
+    - Update dependencies in requirement.txt
     ```
     pip freeze > requirements.txt
     ```
