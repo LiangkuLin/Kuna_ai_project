@@ -1,5 +1,4 @@
 # Law_Genius - Law & Chatgpt & Langchain Integration App
-### Project initialization 
 
 ### Project Running
 1. Create a .flaskenv file in the root folder of this project
