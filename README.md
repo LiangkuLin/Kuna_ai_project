@@ -1,7 +1,22 @@
 # Law_Genius - Law & Chatgpt & Langchain Integration App
+### Project Initialization
+1. Open a terminal and switch to WSL
+2. Navigate to the project directory
+3. Create a virtual environment named 'virt':
+    ```
+    virtualenv virt
+    ```
+4. Activate the virtual environment:
+    ```
+    source virt/bin/activate
+    ```
+5. Install all the required dependencies (from requitements.txt):
+    ```
+    pip install -r requirements.txt
+    ```
 
-### Project Running
-1. Create a .flaskenv file in the root folder of this project
+### Running the Project
+1. Create a .flaskenv file in the root directory of the project with the following content:
     ```
     FLASK_APP=run.py
     FLASK_ENV=development
@@ -14,19 +29,19 @@
     REFIS_PASSWORD=xxxx
     ``` 
 
-2. Set up python environment and run project
-    - Open termianl and head to WSL
-    - CD to the project repository
-    - Create running env 
+2. To run the project:
+    - Open a terminal and switch to WSL
+    - Navigate to the project directory
+    - Activate the virtual environment:
     ```
     source virt/bin/activate
     ```
-    - Run this project 
+    - Start the project:
     ```
     python application.py
     ```
 ### Deployment (optional)
-1. Only several folders are needed when deployment
+1. The following folders and files are needed for deployment:
     ```
     app (folder)
     ebextensions (folder)
@@ -35,20 +50,20 @@
     config.py (file)
     requirement.txt (file)
     ```
-2. Zip these folders and upload to aws elastic beanstalk 
+2. Zip these folders and upload them to AWS Elastic Beanstalk
 
 ### Update requirement.txt (optional)
-    - Check all dependencies in venv (virt)
+    - To list all dependencies in the virtual environment: 
     ```
     pip freeze
     ```
-    - Update dependencies in requirement.txt
+    - To update the requirements.txt file with the current dependencies
     ```
     pip freeze > requirements.txt
     ```
 
 ### Vector database (optional)
-1. We are currently using a Pinecone database. Please open the terminal and cd to the manual folder. Run the following command to create the vector db (Note that dependencies are needed in this step)   
+1. We are using a Pinecone database. To create the vector database, navigate to the manual folder and run the following command (ensure all dependencies are installed):
     ```
     python database.py
     ```
