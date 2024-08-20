@@ -18,15 +18,17 @@
 ### Running the Project
 1. Create a .flaskenv file in the root directory of the project with the following content:
     ```
-    FLASK_APP=run.py
+    FLASK_APP=application.py
     FLASK_ENV=development
     OPENAI_API_KEY=xxxxx
     PINECONE_API_KEY=xxxx
     PINECONE_INDEX_NAME=xxxx
-    REDIS_HOST=XXXX
-    REDIS_PORT=1xxx
+    REDIS_HOST=xxx
+    REDIS_PORT=xxx
     REDIS_USERNAME=xxx
-    REFIS_PASSWORD=xxxx
+    REFIS_PASSWORD=xxx
+    LINE_CHANNEL_TOKEN =xxx
+    LINE_SECRETE =xxx
     ``` 
 
 2. To run the project:
