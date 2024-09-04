@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify,request
 from app.model.response import ApiResponse
 from app.util.length_check import checklength
 
-
 api_langchain = Blueprint('langchain', __name__)
 
 @api_langchain.route('/qs',methods=['GET'])

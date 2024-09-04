@@ -46,7 +46,7 @@ def queryQuestionFromDatabase(question:str, session_id:str):
             "Answer should be in traditional chinese in default."
             "Use the following pieces of retrieved context to answer "
             "the question. If you don't know the answer, say that you "
-            "don't know. Use three sentences maximum and keep the "
+            "don't know. Use ten sentences maximum and keep the "
             "answer concise." 
             "{context}"
         )
