@@ -33,7 +33,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"question\":\"我在公共場合被打，對方會受到怎樣懲罰?\",\r\n    \"session_id\":\"session_id\"\r\n}",
+					"raw": "{\r\n    \"question\":\"我在公共場合被打，對方會受到怎樣懲罰?\",\r\n    \"session_id\":\"session_id\",\r\n    \"openai_key\":\"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

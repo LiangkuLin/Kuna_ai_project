@@ -15,10 +15,14 @@ import os
 
 
 
-def queryQuestionFromDatabase(question:str, session_id:str): 
+def queryQuestionFromDatabase(question:str, session_id:str , openai_key): 
         langchain.debug = True
-        embeddings = OpenAIEmbeddings()
-        llm =ChatOpenAI()
+        embeddings = OpenAIEmbeddings(
+            api_key=openai_key
+        )
+        llm =ChatOpenAI(
+            api_key=openai_key
+        )
         db = PineconeVectorStore(embedding=embeddings,index_name=os.getenv("PINECONE_INDEX_NAME"))
         retriever =  db.as_retriever()
         ### Contextualize question ###

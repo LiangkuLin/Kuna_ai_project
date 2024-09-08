@@ -15,8 +15,9 @@ def question_database():
     # 檢查數據是否為字串
     question = data.get('question')
     session_id = data.get('session_id')
+    openai_key = data.get('openai_key')
 
-    if not isinstance(question, str) or not isinstance(session_id, str):
+    if not isinstance(question, str) or not isinstance(session_id, str) or not isinstance(openai_key, str):
         return jsonify(ApiResponse("error","question' and 'session_id' must be strings").json), 400
     
     
@@ -24,7 +25,7 @@ def question_database():
     try:
         from app.service.prompt import queryQuestionFromDatabase 
         checklength(question,100)
-        answer = queryQuestionFromDatabase(question,session_id)
+        answer = queryQuestionFromDatabase(question,session_id,openai_key)
         
         #返回json
         return jsonify(ApiResponse(answer).json),200
