@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c3e2e62e-073e-4a89-9df1-ac730da9e5de",
+		"_postman_id": "8ff4490f-daf2-4ee6-9a3d-54d401be1954",
 		"name": "ai_law",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19466641"
@@ -29,10 +29,19 @@
 		{
 			"name": "query_database",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\":\"我在公共場合被打，對方會受到怎樣懲罰?\",\r\n    \"session_id\":\"session_id\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/database/qs?question=我在廁所被偷窺，偷看應付什麼責任&session_id=Ku123",
+					"raw": "http://localhost:8080/api/database/qs",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -46,7 +55,40 @@
 					"query": [
 						{
 							"key": "question",
-							"value": "我在廁所被偷窺，偷看應付什麼責任"
+							"value": "我在公共場合被打，對方會受到怎樣懲罰?",
+							"disabled": true
+						},
+						{
+							"key": "session_id",
+							"value": "asd123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "line",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/database/qs?question=我說的妹妹是陰道&session_id=Ku123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"database",
+						"qs"
+					],
+					"query": [
+						{
+							"key": "question",
+							"value": "我說的妹妹是陰道"
 						},
 						{
 							"key": "session_id",
